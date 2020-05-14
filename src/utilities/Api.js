@@ -5,6 +5,5 @@ export function Api() {
 		//config.api.baseURL
 		baseURL: 'http://localhost:3000'
 	})
-
 	return apiCreate
 }

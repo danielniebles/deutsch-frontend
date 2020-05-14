@@ -1,21 +1,37 @@
 <template>
-    <div id="view-all-verbs">    
-        <ul class="collection with-header">
-            <li class="collection-header"><h4>Verbs</h4></li>
-            <li v-for="verb in verbs" v-bind:key="verb.docId" class="collection-item">{{verb.value}}
-                
-                <router-link class="secondary-content" v-bind:to="{name: 'view-verb', 
-                params: {docId: verb.docId}}">
-                    <i class="fa fa-eye"></i>
-                </router-link>
-            </li>
-        </ul>
-        <div class="fixed-action-btn">
-            <router-link to="/verbs/addverb" class="btn-floating btn-large blue">
-             <i class="fa fa-plus"></i>
-            </router-link>
-        </div>
-    </div>
+    <v-row>
+        <v-col >
+            <v-card class="mx-auto" tile elevation="8">
+                <v-list tile>
+                    <v-subheader>Verbs</v-subheader>
+                    <template v-for="verb in verbs">
+                        <v-divider v-if="true" :key="verb.docId" :inset="false"></v-divider>
+
+                        <v-list-item else  :key="verb.docId">
+                        
+                            <v-list-item-content>
+                                <v-list-item-title v-text="verb.value"></v-list-item-title>
+                            </v-list-item-content>
+
+                            <v-list-item-content>
+                                <v-list-item-title v-text="verb.translation"></v-list-item-title>
+                            </v-list-item-content>
+                            
+                            <v-list-item-icon >
+                                <router-link style="text-decoration: none;" 
+                                    v-bind:to="{name: 'view-verb', 
+                                    params: {docId: verb.docId}}">
+                                    <v-btn icon>
+                                        <v-icon>mdi-information</v-icon>
+                                    </v-btn>
+                                </router-link>
+                            </v-list-item-icon>
+                        </v-list-item>    
+                    </template>          
+                </v-list>
+            </v-card>
+        </v-col>
+    </v-row>
 </template>
 
 <script>

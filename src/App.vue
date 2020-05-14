@@ -1,17 +1,31 @@
 <template>
-    <div id="app">
-      <Navbar/>
+  <v-app>
+    <v-app-bar
+      app
+      color="secondary"
+      dark
+    >
+      <v-app-bar-nav-icon></v-app-bar-nav-icon>
+      <v-toolbar-title>Deutsche Lernen</v-toolbar-title>
+      <v-spacer></v-spacer>
+    </v-app-bar>
+
+    <v-content>
       <router-view/>
-    </div>
+    </v-content>
+  </v-app>
 </template>
 
 <script>
-import Navbar from '@/components/Navbar.vue'
 
 export default {
-  name: 'app',
+  name: 'App',
+
   components: {
-    Navbar
-  }
-}
+  },
+
+  data: () => ({
+    //
+  }),
+};
 </script>
