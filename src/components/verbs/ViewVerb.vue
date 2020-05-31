@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import {Api} from '@/utilities/Api'
+import {Api} from '../../utilities/Api'
 export default {
     name: "view-verb",
     date(){

@@ -1,9 +1,11 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import ViewAllVerbs from '@/components/ViewAllVerbs.vue'
-import ViewVerb from '@/components/ViewVerb.vue'
-import AddVerb from '@/components/AddVerb.vue'
-import Grid from '@/views/Grid.vue'
+import ViewAllVerbs from '../components/verbs/ViewAllVerbs.vue'
+import ViewVerb from '../components/verbs/ViewVerb.vue'
+import AddVerb from '../components/verbs/AddVerb.vue'
+import ViewAllNouns from '../components/nouns/ViewAllNouns.vue'
+import AddNoun from '../components/nouns/AddNoun.vue'
+import Grid from '../views/Grid.vue'
 
 Vue.use(VueRouter)
 
@@ -14,9 +16,19 @@ const routes = [
     component: ViewAllVerbs
   },
   {
+    path: '/nouns/all',
+    name: 'view-all-nouns',
+    component: ViewAllNouns
+  },
+  {
     path: '/verbs/addverb',
     name: 'add-verb',
     component: AddVerb
+  },
+  {
+    path: '/verbs/addnoun',
+    name: 'add-noun',
+    component: AddNoun
   },
   {
     path: '/verbs/:docId',
