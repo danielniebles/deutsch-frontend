@@ -11,12 +11,12 @@
     </v-app-bar>
 
     <v-navigation-drawer app v-model="drawer" 
-    temporary
+    temporary dark
     
     src="https://wallpapercave.com/wp/wp2260612.jpg">
       <v-list>
         <v-list-item v-for="nav in navs" :key="nav.title"
-        :to="{path: `/${nav.link}`}" color="white">
+        :to="{path: `/${nav.link}`}">
           <v-list-item-icon>
             <v-icon>{{nav.icon}}</v-icon>
           </v-list-item-icon>
@@ -52,6 +52,16 @@ export default {
         icon: 'dashboard',
         title: 'Verbs',
         link: 'verbs/all'
+      },
+      {
+        icon: 'dashboard',
+        title: 'Nouns',
+        link: 'nouns/all'
+      },
+      {
+        icon: 'dashboard',
+        title: 'Adjectives',
+        link: 'adjs/all'
       }
     ]
   }

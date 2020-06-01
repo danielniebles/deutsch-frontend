@@ -1,29 +1,29 @@
 <template>
-  <v-container id="view-all-nouns" fluid>
+  <v-container id="view-all-adjs" fluid>
     <v-row>
       <v-col>
         <v-card class="mx-auto" shaped elevation="8">
           <v-list two-line>
-            <v-subheader>Nouns</v-subheader>
-            <template v-for="(noun,index) in nouns">
+            <v-subheader>Adjectives</v-subheader>
+            <template v-for="(adjective,index) in adjectives">
               <v-divider
                 v-if="true"
-                :key="noun.noun"
+                :key="adjective.value"
                 :inset="false"
               ></v-divider>
 
-              <v-list-item else :key="noun.docId" style="height:1px">
+              <v-list-item else :key="adjective.docId" style="height:1px">
                 <v-list-item-content>
-                  <v-list-item-title v-text="noun.article + ' ' + noun.noun"></v-list-item-title>
-                  <v-list-item-subtitle v-text="noun.translation"></v-list-item-subtitle>
+                  <v-list-item-title v-text="adjective.value"></v-list-item-title>
+                  <v-list-item-subtitle v-text="adjective.translation"></v-list-item-subtitle>
                 </v-list-item-content>
 
                 <v-list-item-icon>
                   <router-link
                     style="text-decoration: none;"
                     :to="{
-                      name: 'view-noun',
-                      params: { docId: noun.docId },
+                      name: 'view-adj',
+                      params: { docId: adjective.docId },
                     }"
                   >
                     <v-btn icon>
@@ -33,7 +33,7 @@
                 </v-list-item-icon>
 
                 <v-list-item-icon>
-                  <v-btn icon @click="editNoun(index)">
+                  <v-btn icon @click="editAdj(index)">
                     <v-icon>mdi-pencil</v-icon>
                   </v-btn>
                 </v-list-item-icon>
@@ -44,7 +44,7 @@
         </v-card>
       </v-col>
     </v-row>
-    <router-link to="/nouns/addnoun" style="text-decoration: none">
+    <router-link to="/adj/addadj" style="text-decoration: none">
       <v-btn class="mx-2 secondary" fab fixed right bottom>
         <v-icon dark>mdi-plus</v-icon>
       </v-btn>
@@ -53,7 +53,7 @@
     <v-row>
         <v-col cols="12">
              <v-overlay :value="overlay" :absolute="absolute">
-                <EditNoun :noun="this.nouns[this.selectedNoun]"></EditNoun>
+                <EditAdj :adj="this.adjectives[this.selectedAdj]"></EditAdj>
             </v-overlay>
         </v-col>
     </v-row>
@@ -65,37 +65,37 @@
 <script>
 import { Api } from "../../utilities/Api";
 import { eventBus } from "../../main.js";
-import EditNoun from "./EditNoun";
+import EditAdj from "./EditAdj";
 
 export default {
 
-  name: "view-nouns",
+  name: "view-adj",
   components: {
-    EditNoun,
+    EditAdj,
   },
   data() {
     return {
-      nouns: [],
-      selectedNoun: 0,
+      adjectives: [],
+      selectedAdj: 0,
       overlay: false,
       absolute: false,
     };
   },
   methods: {
-    async getNouns() {
-      const response = await Api().get("/nouns/all");
+    async getAdjs() {
+      const response = await Api().get("/adjectives/all");
       const dummyVar = response.data.data;
       dummyVar.forEach((element) => {
-        this.nouns.push(element);
+        this.adjectives.push(element);
       });
     },
-    editNoun(index){
-      this.selectedNoun = index
+    editAdj(index){
+      this.selectedAdj = index
       this.overlay = !this.overlay
     }
   },
   mounted() {
-    this.getNouns();
+    this.getAdjs();
     eventBus.$on('click-back', (overlay) => {
       this.overlay = !overlay;
     });

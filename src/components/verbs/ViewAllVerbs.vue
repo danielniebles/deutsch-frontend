@@ -1,5 +1,5 @@
 <template>
-  <v-container id="view-verbs" fluid>
+  <v-container id="view-all-verbs" fluid>
     <v-row>
       <v-col>
         <v-card class="mx-auto" shaped elevation="8">

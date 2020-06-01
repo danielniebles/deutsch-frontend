@@ -1,20 +1,20 @@
 <template>
-  <v-container fluid class="fill-height" id="edit-noun">
+  <v-container fluid class="fill-height" id="edit-verb">
     <v-row align="center" justify="center">
       <v-col>
         <v-card shaped>
           <v-toolbar color="secondary" dark flat>
-            <v-toolbar-title>Edit Noun</v-toolbar-title>
+            <v-toolbar-title>Edit Adjective</v-toolbar-title>
             <v-spacer></v-spacer>
             <v-icon>mdi-pencil</v-icon>
           </v-toolbar>
 
-          <v-form @submit.prevent="updateNoun">
+          <v-form @submit.prevent="updateAdj">
             <v-card-text>
               <v-text-field
                 prepend-icon="mdi-code-tags"
-                value="noun.article"
-                v-model="noun.article"
+                value="adj.value"
+                v-model="adj.value"
                 type="text"
                 required
                 autocomplete="off"
@@ -23,18 +23,8 @@
 
               <v-text-field
                 prepend-icon="mdi-code-tags"
-                value="noun.noun"
-                v-model="noun.noun"
-                type="text"
-                required
-                autocomplete="off"
-              >
-              </v-text-field>
-
-              <v-text-field
-                prepend-icon="mdi-code-tags"
-                value="noun.translation"
-                v-model="noun.translation"
+                value="adj.translation"
+                v-model="adj.translation"
                 type="text"
                 required
                 autocomplete="off"
@@ -63,15 +53,15 @@
 import { eventBus } from "../../main.js";
 import { Api } from "../../utilities/Api";
 export default {
-  name: "edit-noun",
+  name: "edit-adj",
   data() {
     return {
-        overlay: null,
-        errors: []
+      overlay: null,
+       errors: []
     };
   },
   props: {
-     noun: {
+     adj: {
           type: Object,
           required: true
         }
@@ -81,22 +71,22 @@ export default {
       this.overlay = !this.overlay;
       eventBus.$emit("click-back", this.overlay);
     },
-    async updateNoun(){
+    async updateAdj(){
       this.errors.length = 0
-      const url = `/nouns/update/${this.noun.docId}`
-        if(this.noun.article && this.noun.noun && this.noun.translation){
+      const url = `/adjectives/update/${this.adj.docId}`
+        if(this.adj.translation && this.adj.value){
             await Api().post(url, {
-                article: this.noun.article,
-                noun: this.noun.noun,
-                translation: this.noun.translation
+                value: this.adj.value,
+                translation: this.adj.translation
                 })
             this.clickBack();
         }else{
-            if(!this.article)this.errors.push("Article required")
-            if(!this.noun)this.errors.push("Noun required")
+            if(!this.value)this.errors.push("Value required")
             if(!this.translation)this.errors.push("Translation required")
         }
     }
-  }
+  },
+  
+  
 };
 </script>

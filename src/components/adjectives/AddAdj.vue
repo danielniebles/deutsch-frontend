@@ -4,32 +4,20 @@
       <v-col cols="12" sm="8" md="4">
         <v-card shaped dark>
           <v-toolbar color="secondary" dark flat>
-            <v-toolbar-title>Add Noun</v-toolbar-title>
+            <v-toolbar-title>Add Adjective</v-toolbar-title>
             <v-spacer></v-spacer>
             <v-icon>mdi-plus</v-icon>
           </v-toolbar>
 
-          <v-form @submit.prevent="saveNoun">
+          <v-form @submit.prevent="saveAdj">
             <v-card-text>
               <v-text-field
-                label="article"
-                name="article"
+                label="Value"
+                name="value"
                 prepend-icon="mdi-code-tags"
                 :rules="rules"
                 type="text"
-                v-model="article"
-                required
-                autocomplete="off"
-              >
-              </v-text-field>
-
-              <v-text-field
-                label="noun"
-                name="noun"
-                prepend-icon="mdi-code-tags"
-                :rules="rules"
-                type="text"
-                v-model="noun"
+                v-model="value"
                 required
                 autocomplete="off"
               >
@@ -51,8 +39,8 @@
             <v-card-actions>
               <v-row>
                 <v-col align="end ">
-                  <router-link to="/nouns/all" style="text-decoration: none;">
-                    <v-btn >Back</v-btn>
+                  <router-link to="/adjs/all" style="text-decoration: none;">
+                    <v-btn>Back</v-btn>
                   </router-link>
                   <v-btn type="submit" class="secondary ml-3 mr-1">Submit</v-btn>
                 </v-col>
@@ -68,30 +56,27 @@
 <script>
 import { Api } from "../../utilities/Api";
 export default {
-  name: "add-noun",
+  name: "add-adj",
   data() {
     return {
-      article: null,
-      noun: null,
-      tranlsation: null,
+      value: null,
+      translation: null,
       errors: [],
       rules: [(v) => !!v || "This value is required"],
     };
   },
   methods: {
-    async saveNoun() { 
+    async saveAdj() { 
         this.errors.length = 0
-        if(this.article && this.noun && this.translation) {
-            await Api().post("/nouns/write", {
-                article: this.article,
-                noun: this.noun,
-                translation: this.translation
+        if(this.translation && this.value) {
+            await Api().post("/adjectives/write", {
+                value: this.value,
+                translation: this.translation,
                 })
             const path = "/";
-            if (this.$route.path !== path) this.$router.push("/nouns/all");
+            if (this.$route.path !== path) this.$router.push("/adjs/all");
         }else{
-            if(!this.article)this.errors.push("Article required")
-            if(!this.noun)this.errors.push("Noun required")
+            if(!this.value)this.errors.push("Value required")
             if(!this.translation)this.errors.push("Translation required")
         }    
     },

@@ -4,8 +4,11 @@ import ViewAllVerbs from '../components/verbs/ViewAllVerbs.vue'
 import ViewVerb from '../components/verbs/ViewVerb.vue'
 import AddVerb from '../components/verbs/AddVerb.vue'
 import ViewAllNouns from '../components/nouns/ViewAllNouns.vue'
+import AddAdj from '../components/adjectives/AddAdj.vue'
+import ViewAllAdjs from '../components/adjectives/ViewAllAdj.vue'
 import AddNoun from '../components/nouns/AddNoun.vue'
-import Grid from '../views/Grid.vue'
+import Grid from '../components/exercise/InputArticle.vue'
+import Exercise from '../components/exercise/Exercise.vue'
 
 Vue.use(VueRouter)
 
@@ -21,14 +24,24 @@ const routes = [
     component: ViewAllNouns
   },
   {
+    path: '/adjs/all',
+    name: 'view-all-adjs',
+    component: ViewAllAdjs
+  },
+  {
     path: '/verbs/addverb',
     name: 'add-verb',
     component: AddVerb
   },
   {
-    path: '/verbs/addnoun',
+    path: '/nouns/addnoun',
     name: 'add-noun',
     component: AddNoun
+  },
+  {
+    path: '/adj/addadj',
+    name: 'add-adj',
+    component: AddAdj
   },
   {
     path: '/verbs/:docId',
@@ -39,6 +52,11 @@ const routes = [
     path: '/',
     name: 'grid',
     component: Grid
+  },
+  {
+    path: '/exercise',
+    name: 'exercise',
+    component: Exercise
   }
 ]
 
