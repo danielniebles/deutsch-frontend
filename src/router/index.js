@@ -7,7 +7,8 @@ import ViewAllNouns from '../components/nouns/ViewAllNouns.vue'
 import AddAdj from '../components/adjectives/AddAdj.vue'
 import ViewAllAdjs from '../components/adjectives/ViewAllAdj.vue'
 import AddNoun from '../components/nouns/AddNoun.vue'
-import Grid from '../components/exercise/InputArticle.vue'
+//import Grid1 from '../components/exercise/InputArticle.vue'
+import Grid from '../views/Grid.vue'
 import Exercise from '../components/exercise/Exercise.vue'
 
 Vue.use(VueRouter)

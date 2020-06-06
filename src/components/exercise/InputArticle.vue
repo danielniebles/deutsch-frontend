@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid class="fill-height" id="add-verb">
+  <v-container fluid class="fill-height" id="input-article">
     <v-row align="center" justify="center">
       <v-col cols="12" sm="8" md="4">
         <v-card shaped dark>
@@ -18,6 +18,7 @@
                   <v-text-field
                     label="Article"
                     name="article"
+                    v-model="article"
                     prepend-icon="mdi-code-tags"
                     type="text"
                     required
@@ -27,7 +28,7 @@
                 </v-col>
 
                 <v-col cols="8" style="padding: 0">
-                  <v-card-text style="margin: 0; padding: 0">Noun</v-card-text>
+                  <v-card-text style="margin: 0; padding: 0">{{currentQuestion.noun}}</v-card-text>
                 </v-col>
               </v-row>
             </v-card-text>
@@ -47,27 +48,45 @@
       </v-col>
     </v-row>
 
-    <v-snackbar v-model="check" color="success">
-      Correct!
-      <v-btn @click="check = false" text>Next</v-btn>
+    <v-snackbar v-model="check" :color="status">
+      {{message}}
+      <v-btn @click="nextClicked" text>Next</v-btn>
     </v-snackbar>
     
   </v-container>
 </template>
 
 <script>
-//import { Api } from "../../utilities/Api";
+import { mapGetters, mapState } from 'vuex';
+import { eventBus } from "../../main.js";
 export default {
   name: "input-article",
   data() {
     return {
+      article: null,
       check: false,
+      status: null,
+      message: null
     };
   },
+  computed: mapState(['currentQuestion']),
   methods: {
+    ...mapGetters(['getRandomQuestion']),
     checkAnswer() {
       this.check = !this.check;
+      if(this.article === this.currentQuestion.article){
+        this.status = "success"
+        this.message = "Correct!"
+      }else{
+        this.status = "red"
+        this.message = "Wrong!"
+      }
     },
+    nextClicked(){
+      this.check = false
+      console.log('emit from next')
+      eventBus.$emit('next-click')
+    }
   },
 };
 </script>

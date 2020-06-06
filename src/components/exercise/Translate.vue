@@ -42,15 +42,35 @@
         </v-card>
       </v-col>
     </v-row>
+
+    <v-snackbar v-model="check" color="success">
+      Correct!
+      <v-btn @click="nextClicked" text>Next</v-btn>
+    </v-snackbar>
+
   </v-container>
 </template>
 
 <script>
-//import { Api } from "../../utilities/Api";
+import { eventBus } from "../../main.js";
+import { mapGetters } from 'vuex';
 export default {
   name: "input-article",
   data() {
-    return {};
+    return {
+      check: false
+    };
   },
+  methods: {
+    ...mapGetters(['getRandomQuestion']),
+    checkAnswer() {
+      this.check = !this.check;
+    },
+    nextClicked(){
+      this.check = false
+      console.log('next click')
+      eventBus.$emit('next-click')
+    }
+  }
 };
 </script>
