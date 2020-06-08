@@ -18,7 +18,14 @@ export default new Vuex.Store({
     },
     pushNewRandom(state, payload){
       state.currentQuestion = payload
+    },
+    setProperty(state, payload){
+      state.exercise[payload.position][payload.prop] = payload.value
+    },
+    updateStateProp(state, payload){
+      state[payload.prop] = payload.value
     }
+
   },
   actions: {
     async getExercise({ commit }){
@@ -27,11 +34,17 @@ export default new Vuex.Store({
     newRandomQuestion( {commit, getters}) {
       const dummyVar = getters.getUnanswered
       commit('pushNewRandom', dummyVar[Math.floor(Math.random() * dummyVar.length)])
+    },
+    markAnswered({ commit }, options){
+      commit('setProperty', options)
     }
   },
   getters: {
     getUnanswered(state){
-      return state.exercise.filter(question => question.answered === null)
+      return state.exercise.filter(question => question.answered === false)
+    },
+    getRemaining(state){
+      return state.exercise.filter(question => question.answered === false).length
     }
   },
   modules: {

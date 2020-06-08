@@ -73,7 +73,7 @@ export default {
     return {
       article: null,
       noun: null,
-      tranlsation: null,
+      translation: null,
       errors: [],
       rules: [(v) => !!v || "This value is required"],
     };

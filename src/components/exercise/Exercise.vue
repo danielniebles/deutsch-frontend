@@ -8,11 +8,12 @@
     </v-row>
 
     <InputArticle v-if="currentQuestion" 
-    v-show="currentQuestion.id === '01' ||
-    currentQuestion.id === '02' ||
-    currentQuestion.id === '03'"></InputArticle>
+    v-show="currentQuestion.id === '01'"></InputArticle>
     <Translate v-if="currentQuestion" 
-    v-show="currentQuestion.id === '04' ||
+    v-show="
+    currentQuestion.id === '02' ||
+    currentQuestion.id === '03' ||
+    currentQuestion.id === '04' ||
     currentQuestion.id === '05'"></Translate>
     
       
@@ -36,14 +37,13 @@ export default {
     return {
     };
   },
-  computed: mapState(['exercise', 'currentQuestion']),
+  computed: mapState(['exercise', 'currentQuestion', 'remaining']),
   methods:{
-      ...mapGetters(['getRandomQuestion']),
+      ...mapGetters(['getRandomQuestion','getRemaining']),
       ...mapActions(['getExercise', 'newRandomQuestion']),
       startExercise(){
         this.newRandomQuestion()
         console.log('start exercise')
-        console.log(this.currentQuestion)
       }
     },
   mounted(){
@@ -51,7 +51,7 @@ export default {
         console.log(this.exercise)
         eventBus.$on('next-click', () => {
           this.newRandomQuestion()
-          console.log(this.currentQuestion)
+          console.log('Quedan from getter', this.getRemaining())
         })
   }
 }

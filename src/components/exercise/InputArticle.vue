@@ -57,7 +57,7 @@
 </template>
 
 <script>
-import { mapGetters, mapState } from 'vuex';
+import { mapGetters, mapState, mapActions } from 'vuex';
 import { eventBus } from "../../main.js";
 export default {
   name: "input-article",
@@ -72,6 +72,7 @@ export default {
   computed: mapState(['currentQuestion']),
   methods: {
     ...mapGetters(['getRandomQuestion']),
+    ...mapActions(['markAnswered']),
     checkAnswer() {
       this.check = !this.check;
       if(this.article === this.currentQuestion.article){
@@ -84,9 +85,14 @@ export default {
     },
     nextClicked(){
       this.check = false
+      this.article = null
+      this.markAnswered({prop: "answered", value:true, position: this.currentQuestion.exerciseid})
       console.log('emit from next')
       eventBus.$emit('next-click')
     }
   },
+  mounted(){
+    console.log(this.currentQuestion.id)
+  }
 };
 </script>

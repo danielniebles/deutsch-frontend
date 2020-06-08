@@ -62,6 +62,11 @@ export default {
         icon: 'dashboard',
         title: 'Adjectives',
         link: 'adjs/all'
+      },
+      {
+        icon: 'mdi-pencil',
+        title: 'Exercise',
+        link: 'exercise'
       }
     ]
   }
