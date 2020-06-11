@@ -10,11 +10,11 @@
           </v-toolbar>
 
           <v-form @submit.prevent="checkAnswer">
-            <v-card-title>Which is the article?</v-card-title>
+            <v-card-title style="padding: 0px" class="mt-2 ml-5" >Which is the article?</v-card-title>
 
-            <v-card-text>
-              <v-row justify="center" align="center">
-                <v-col cols="4">
+            <v-card-text style="padding: 0px">
+              <v-row justify="center" align="center" style="padding: 0px" class="mt-2 ml-5">
+                <v-col cols="4" style="padding: 0px">
                   <v-text-field
                     label="Article"
                     name="article"

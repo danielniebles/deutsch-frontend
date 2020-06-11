@@ -10,6 +10,7 @@ import AddNoun from '../components/nouns/AddNoun.vue'
 //import Grid1 from '../components/exercise/InputArticle.vue'
 import Grid from '../views/Grid.vue'
 import Exercise from '../components/exercise/Exercise.vue'
+import Welcome from '../components/Welcome.vue'
 
 Vue.use(VueRouter)
 
@@ -58,6 +59,11 @@ const routes = [
     path: '/exercise',
     name: 'exercise',
     component: Exercise
+  },
+  {
+    path: '/welcome',
+    name: 'welcome',
+    component: Welcome
   }
 ]
 

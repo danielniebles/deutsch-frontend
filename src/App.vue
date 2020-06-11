@@ -80,4 +80,7 @@ export default {
     no-repeat center center fixed !important;
   background-size: cover;
 }
+.value-box{
+  padding: 0px
+}
 </style>

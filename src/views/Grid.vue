@@ -1,44 +1,33 @@
 <template>
-    <v-container wrap>
-        <v-row>
-            <v-col cols="12">
-                {{getRandomQuestion()}}
-            </v-col>
-        </v-row>
-        <v-row>
-            <v-col cols="12">
-                <p>{{}}</p>
-            </v-col>
-        </v-row>
-       
-        <v-row >
-            <v-col align="end">
-                <h1 class="display-1">Lorem, ipsum dolor.</h1>
-                <h1 class="display-2">Lorem, ipsum dolor.</h1>
-            </v-col>
-        </v-row>
-         <v-btn class="mx-2" fab fixed right bottom>
-                        <v-icon dark>mdi-format-list-bulleted-square</v-icon>
-        </v-btn>
+  <v-container fluid class="fill-height">
+    <v-container fluid style="height: 200px">
+      <v-row>
+        <v-col cols="6">
+          <h1 class="display-1">Lorem, ipsum dolor.</h1>
+        </v-col>
+      </v-row>
     </v-container>
+
+    <v-row align="end" style="height: 200px">
+      <v-col cols="4">
+        <h1 class="display-1">Lorem ipsum dolor.</h1>
+      </v-col>
+      <v-col cols="8">
+        <h1 class="display-1">Lorem ipsum dolor.</h1>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
-
 <script>
-import { mapState, mapGetters, mapActions } from 'vuex';
-
+import { mapState, mapGetters, mapActions } from "vuex";
 
 export default {
-
-    computed: mapState(['exercise']),
-    methods: {
-        ...mapGetters(['getRandomQuestion']),
-        ...mapActions(['getExercise'])
-    },
-    mounted(){
-        this.getExercise()
-        this.getRandomQuestion()
-    }
-    
-}
+  computed: mapState(["exercise"]),
+  methods: {
+    ...mapGetters(["getRandomQuestion"]),
+    ...mapActions(["getExercise"]),
+  },
+  mounted() {},
+};
 </script>
