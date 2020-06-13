@@ -1,6 +1,6 @@
 <template>
   <v-container fluid id="translate" class="fill-height">
-    <v-row align="center" justify="center">
+    <v-row align="center" justify="center" class="mt-12">
       <v-col cols="12" sm="8" md="4">
         <v-card shaped dark>
           <v-toolbar color="secondary" dark flat>
@@ -54,6 +54,7 @@
                 type="text"
                 required
                 autocomplete="off"
+                spellcheck="false"
               >
               </v-text-field>
             </v-card-text>
@@ -61,9 +62,7 @@
             <v-card-actions>
               <v-row>
                 <v-col align="end">
-                  <router-link to="/" style="text-decoration: none;">
-                    <v-btn>I don't know</v-btn>
-                  </router-link>
+                  <v-btn>I don't know</v-btn>
                   <v-btn
                     type="submit"
                     class="secondary ml-3 mr-1"
@@ -78,8 +77,8 @@
       </v-col>
     </v-row>
 
-    <v-row class="align-center">
-      <v-container style="padding: 0px" class="align-end">
+    <v-row column justify-space-between style="height:100px">
+      <v-container style="padding:0px;" class=" fill-height align-end">
         <v-alert
           :value="check"
           :color="status"
@@ -87,7 +86,8 @@
           transition="scale-transition"
           :icon="icon"
           prominent
-          class="mb-0"
+          style="width:100%"
+          class="mb-0 justify-end "
         >
           <v-row class="align-center justify-center">
             <v-col class="grow">

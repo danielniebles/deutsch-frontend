@@ -2,7 +2,7 @@
   <v-container fluid class="fill-height" id="edit-noun">
     <v-row align="center" justify="center">
       <v-col>
-        <v-card shaped>
+        <v-card shaped class="card-width">
           <v-toolbar color="secondary" dark flat>
             <v-toolbar-title>Edit Noun</v-toolbar-title>
             <v-spacer></v-spacer>
@@ -100,3 +100,7 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+  @import "../../assets/style.css";
+</style>

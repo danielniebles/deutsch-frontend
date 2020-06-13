@@ -50,14 +50,9 @@
       </v-btn>
     </router-link>
 
-    <v-row>
-        <v-col cols="12">
              <v-overlay :value="overlay" :absolute="absolute">
                 <EditAdj :adj="this.adjectives[this.selectedAdj]"></EditAdj>
             </v-overlay>
-        </v-col>
-    </v-row>
-
     
   </v-container>
 </template>

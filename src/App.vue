@@ -71,12 +71,14 @@ export default {
     ]
   }
 };
+//https://wallpaperaccess.com/full/1198741.jpg
+//https://i.pinimg.com/originals/a1/9a/b7/a19ab7e71095bb14bd13c6c0fc4c5e55.jpg
 </script>
 
 
 <style>
 .back {
-  background: url('../public/wallpaper.jpg')
+  background: url('https://wallpapercave.com/wp/wp4030805.jpg')
     no-repeat center center fixed !important;
   background-size: cover;
 }

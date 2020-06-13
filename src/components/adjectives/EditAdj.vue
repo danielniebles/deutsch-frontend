@@ -1,8 +1,8 @@
 <template>
-  <v-container fluid class="fill-height" id="edit-verb">
+  <v-container fluid class="fill-height" id="edit-adj">
     <v-row align="center" justify="center">
       <v-col>
-        <v-card shaped>
+        <v-card shaped class="card-width   card-two-line">
           <v-toolbar color="secondary" dark flat>
             <v-toolbar-title>Edit Adjective</v-toolbar-title>
             <v-spacer></v-spacer>
@@ -57,36 +57,38 @@ export default {
   data() {
     return {
       overlay: null,
-       errors: []
+      errors: [],
     };
   },
   props: {
-     adj: {
-          type: Object,
-          required: true
-        }
+    adj: {
+      type: Object,
+      required: true,
+    },
   },
   methods: {
     clickBack() {
       this.overlay = !this.overlay;
       eventBus.$emit("click-back", this.overlay);
     },
-    async updateAdj(){
-      this.errors.length = 0
-      const url = `/adjectives/update/${this.adj.docId}`
-        if(this.adj.translation && this.adj.value){
-            await Api().post(url, {
-                value: this.adj.value,
-                translation: this.adj.translation
-                })
-            this.clickBack();
-        }else{
-            if(!this.value)this.errors.push("Value required")
-            if(!this.translation)this.errors.push("Translation required")
-        }
-    }
+    async updateAdj() {
+      this.errors.length = 0;
+      const url = `/adjectives/update/${this.adj.docId}`;
+      if (this.adj.translation && this.adj.value) {
+        await Api().post(url, {
+          value: this.adj.value,
+          translation: this.adj.translation,
+        });
+        this.clickBack();
+      } else {
+        if (!this.value) this.errors.push("Value required");
+        if (!this.translation) this.errors.push("Translation required");
+      }
+    },
   },
-  
-  
 };
 </script>
+
+<style scoped>
+  @import "../../assets/style.css";
+</style>

@@ -2,10 +2,7 @@
   <v-container fluid class="fill-height" id="exercise">
     <v-content style="padding: 0px">
       <v-carousel v-if="!currentQuestion" v-model="currentSlide">
-        <v-carousel-item
-          v-for="(slide, i) in slides"
-          :key="i"
-        >
+        <v-carousel-item v-for="(slide, i) in slides" :key="i">
           <v-sheet :color="colors[i]" height="100%">
             <v-row class="fill-height" align="center" justify="center">
               <div class="display-3">{{ slide }}</div>
@@ -21,19 +18,19 @@
       </v-row>
     </v-content>
 
-    <InputArticle
-      v-if="currentQuestion"
-      v-show="currentQuestion.id === '01'"
-    ></InputArticle>
     <Translate
       v-if="currentQuestion"
       v-show="
-          currentQuestion.id === '02' ||
+        currentQuestion.id === '02' ||
           currentQuestion.id === '03' ||
           currentQuestion.id === '04' ||
           currentQuestion.id === '05'
       "
     ></Translate>
+    <InputArticle
+      v-if="currentQuestion"
+      v-show="currentQuestion.id === '01'"
+    ></InputArticle>
   </v-container>
 </template>
 
@@ -60,7 +57,8 @@ export default {
   methods: {
     ...mapGetters(["getRandomQuestion", "getRemaining"]),
     ...mapActions(["getExercise", "newRandomQuestion"]),
-    startExercise() {
+    async startExercise() {
+      await this.getExercise();
       this.newRandomQuestion();
       console.log("Current slide is:", this.currentSlide);
       console.log("start exercise");
@@ -70,7 +68,6 @@ export default {
     },
   },
   mounted() {
-    this.getExercise();
     console.log(this.exercise);
     eventBus.$on("next-click", () => {
       this.newRandomQuestion();
@@ -79,3 +76,5 @@ export default {
   },
 };
 </script>
+
+<style scoped></style>
