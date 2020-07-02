@@ -10,8 +10,22 @@
           </v-toolbar>
 
           <v-form @submit.prevent="checkAnswer">
-            <v-card-title style="padding: 0px" class="mt-2 ml-5"
+            <v-card-title
+              v-show="
+                currentQuestion.id === '02' || currentQuestion.id === '04'
+              "
+              style="padding: 0px"
+              class="mt-2 ml-5"
               >Whats the translation of...</v-card-title
+            >
+
+            <v-card-title
+              v-show="
+                currentQuestion.id === '03' || currentQuestion.id === '05'
+              "
+              style="padding: 0px"
+              class="mt-2 ml-5"
+              >Welche ist die Übersetzung...</v-card-title
             >
 
             <v-card-subtitle
@@ -119,10 +133,10 @@ export default {
       icon: null,
     };
   },
-  computed: mapState(["currentQuestion"]),
+  computed: mapState(["currentQuestion", "exercise"]),
   methods: {
-    ...mapGetters(["getRandomQuestion"]),
-    ...mapActions(["markAnswered"]),
+    ...mapGetters(["getRandomQuestion", "getAnsweredCount"]),
+    ...mapActions(["markAnswered", "changeStatus"]),
     checkAnswer() {
       this.check = !this.check;
       this.disabled = !this.disabled;
@@ -132,36 +146,28 @@ export default {
         this.translation ==
           this.currentQuestion.article + " " + this.currentQuestion.noun
       ) {
-        this.status = "success";
-        this.message = "Correct!";
-        this.icon = "mdi-check-circle";
+        this.pushCorrectInfo();
       }
       //Translate DE-EN Noun
       else if (
         this.currentQuestion.id === "03" &&
         this.translation === this.currentQuestion.translation
       ) {
-        this.status = "success";
-        this.message = "Correct!";
-        this.icon = "mdi-check-circle";
+        this.pushCorrectInfo();
       }
       //Translate EN-DE Verb-Adj
       else if (
         this.currentQuestion.id === "04" &&
         this.translation === this.currentQuestion.value
       ) {
-        this.status = "success";
-        this.message = "Correct!";
-        this.icon = "mdi-check-circle";
+        this.pushCorrectInfo();
       }
       //Translate DE-EN Verb-Adj
       else if (
         this.currentQuestion.id === "05" &&
         this.translation === this.currentQuestion.translation
       ) {
-        this.status = "success";
-        this.message = "Correct!";
-        this.icon = "mdi-check-circle";
+        this.pushCorrectInfo();
       } else {
         this.status = "red";
         this.message = "Wrong!";
@@ -178,8 +184,25 @@ export default {
         value: true,
         position: this.currentQuestion.exerciseid,
       });
-      console.log("next click");
-      eventBus.$emit("next-click");
+      if (this.exercise.length === this.getAnsweredCount()){
+        eventBus.$emit("next-click")
+        eventBus.$emit('finished')
+        console.log("Exercise finished")
+      }else{
+        eventBus.$emit("next-click")
+        console.log("next click");
+      }
+
+    },
+    pushCorrectInfo() {
+      this.status = "success";
+      this.message = "Correct!";
+      this.icon = "mdi-check-circle";
+      this.changeStatus({
+        prop: "correct",
+        value: true,
+        position: this.currentQuestion.exerciseid,
+      });
     },
   },
   mounted() {},

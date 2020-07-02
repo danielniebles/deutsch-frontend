@@ -97,16 +97,14 @@ export default {
       icon: null,
     };
   },
-  computed: mapState(["currentQuestion"]),
+  computed: mapState(["currentQuestion", "exercise"]),
   methods: {
-    ...mapGetters(["getRandomQuestion"]),
-    ...mapActions(["markAnswered"]),
+    ...mapGetters(["getRandomQuestion", "getAnsweredCount"]),
+    ...mapActions(["markAnswered", "changeStatus"]),
     checkAnswer() {
       this.check = !this.check;
       if (this.article === this.currentQuestion.article) {
-        this.status = "success";
-        this.message = "Correct!";
-        this.icon = "mdi-check-circle";
+        this.pushCorrectInfo()
       } else {
         this.status = "red";
         this.message = "Wrong!";
@@ -121,9 +119,26 @@ export default {
         value: true,
         position: this.currentQuestion.exerciseid,
       });
-      console.log("emit from next");
-      eventBus.$emit("next-click");
+      if (this.exercise.length === this.getAnsweredCount()){
+        eventBus.$emit("next-click")
+        eventBus.$emit('finished')
+        console.log("Exercise finished")
+      }else{
+        eventBus.$emit("next-click")
+        console.log("next click");
+      }
     },
+    pushCorrectInfo() {
+      this.status = "success";
+      this.message = "Correct!";
+      this.icon = "mdi-check-circle";
+      this.changeStatus({
+        prop: "correct",
+        value: true,
+        position: this.currentQuestion.exerciseid,
+      });
+      }
+    
   },
   mounted() {
     console.log(this.currentQuestion.id);

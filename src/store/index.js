@@ -37,14 +37,24 @@ export default new Vuex.Store({
     },
     markAnswered({ commit }, options){
       commit('setProperty', options)
+    },
+    changeStatus({ commit }, options){
+      commit('setProperty', options)
     }
   },
   getters: {
     getUnanswered(state){
       return state.exercise.filter(question => question.answered === false)
     },
+    getAnsweredCount(state){
+      return state.exercise.filter(question => question.answered === true).length
+    },
     getRemaining(state){
       return state.exercise.filter(question => question.answered === false).length
+    },
+    getCorrectCount(state){
+      console.log("Correctas:", state.exercise.filter(question => question.correct === true).length)
+      return state.exercise.filter(question => question.correct === true).length
     }
   },
   modules: {

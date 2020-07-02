@@ -1,5 +1,5 @@
 <template>
-  <v-app class="back">
+  <v-app class="back" >
     <v-app-bar
       app
       color="secondary"

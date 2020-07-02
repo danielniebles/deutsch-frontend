@@ -23,7 +23,7 @@
                     style="text-decoration: none;"
                     :to="{
                       name: 'view-verb',
-                      params: { docId: verb.docId },
+                      params: { docId: verb.docId, verb: verb },
                     }"
                   >
                     <v-btn icon>

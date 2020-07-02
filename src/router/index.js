@@ -48,7 +48,8 @@ const routes = [
   {
     path: '/verbs/:docId',
     name: 'view-verb',
-    component: ViewVerb
+    component: ViewVerb,
+    props: true
   },
   {
     path: '/',
