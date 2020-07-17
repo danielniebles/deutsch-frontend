@@ -2,15 +2,11 @@
   <v-container id="view-all-verbs" fluid>
     <v-row>
       <v-col>
-        <v-card class="mx-auto" shaped elevation="8">
+        <v-card shaped elevation="8" style="margin:12px;">
           <v-list two-line>
             <v-subheader>Verbs</v-subheader>
             <template v-for="(verb,index) in verbs">
-              <v-divider
-                v-if="true"
-                :key="verb.value"
-                :inset="false"
-              ></v-divider>
+              <v-divider v-if="true" :key="verb.value" :inset="false"></v-divider>
 
               <v-list-item else :key="verb.docId" style="height:1px">
                 <v-list-item-content>
@@ -37,7 +33,6 @@
                     <v-icon>mdi-pencil</v-icon>
                   </v-btn>
                 </v-list-item-icon>
-                
               </v-list-item>
             </template>
           </v-list>
@@ -50,13 +45,9 @@
       </v-btn>
     </router-link>
 
-    <v-row>
-        <v-col cols="12">
-             <v-overlay :value="overlay" :absolute="absolute">
-                <EditVerb :verb="this.verbs[this.selectedVerb]"></EditVerb>
-            </v-overlay>
-        </v-col>
-    </v-row>
+    <v-overlay :value="overlay" :absolute="absolute">
+      <EditVerb :verb="this.verbs[this.selectedVerb]"></EditVerb>
+    </v-overlay>
   </v-container>
 </template>
 
@@ -64,43 +55,68 @@
 import { Api } from "../../utilities/Api";
 import { eventBus } from "../../main.js";
 import EditVerb from "./EditVerb";
+import { mapState } from "vuex";
 
 export default {
-
   name: "view-verbs",
   components: {
-    EditVerb,
+    EditVerb
   },
   data() {
     return {
       verbs: [],
       selectedVerb: 0,
       overlay: false,
-      absolute: false,
+      absolute: false
     };
   },
+  computed: mapState(["currentQuestion", "exercise"]),
   methods: {
     async getVerbs() {
       const response = await Api().get("/verbs/all");
       const dummyVar = response.data.data;
       //console.log(dummyVar);
-      dummyVar.forEach((element) => {
+      dummyVar.forEach(element => {
         this.verbs.push(element);
       });
     },
-    editVerb(index){
-      this.selectedVerb = index
-      this.overlay = !this.overlay
+    editVerb(index) {
+      this.selectedVerb = index;
+      this.overlay = !this.overlay;
       //eventBus.$emit('edit-verbs', this.verbs[this.selectedVerb])
       //console.log('emitted')
     }
   },
   mounted() {
     this.getVerbs();
-    eventBus.$on('click-back', (overlay) => {
+    eventBus.$on("click-back", overlay => {
       this.overlay = !overlay;
     });
-    
-  },
+    console.log(this.exercise.length)
+  }
 };
 </script>
+
+<style scoped>
+.container .v-list {
+  --background: #e0e5ec;
+  --gray: #797d7f;
+  background-color: var(--background);
+}
+
+.container {
+  --background: #e0e5ec;
+  --gray: #797d7f;
+  background-color: var(--background);
+}
+
+.v-list {
+  box-shadow: 8px 8px 16px rgba(165, 177, 198, 0.8),
+    -8px -8px 16px rgba(255, 255, 255, 0.8) !important;
+}
+
+.v-list .v-sheet{
+  box-shadow: 8px 8px 16px rgba(165, 177, 198, 0.8),
+    -8px -8px 16px rgba(255, 255, 255, 0.8) !important;
+}
+</style>

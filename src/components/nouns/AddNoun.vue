@@ -1,8 +1,8 @@
 <template>
-  <v-container fluid class="fill-height" id="add-verb">
+  <v-container fluid class="fill-height" id="add-noun">
     <v-row align="center" justify="center">
       <v-col cols="12" sm="8" md="4">
-        <v-card shaped dark>
+        <v-card shaped dark >
           <v-toolbar color="secondary" dark flat>
             <v-toolbar-title>Add Noun</v-toolbar-title>
             <v-spacer></v-spacer>

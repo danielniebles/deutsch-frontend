@@ -11,6 +11,7 @@ import AddNoun from '../components/nouns/AddNoun.vue'
 import Grid from '../views/Grid.vue'
 import Exercise from '../components/exercise/Exercise.vue'
 import Welcome from '../components/Welcome.vue'
+import Summary from '../components/exercise/Summary.vue'
 
 Vue.use(VueRouter)
 
@@ -62,6 +63,11 @@ const routes = [
     component: Exercise
   },
   {
+    path: '/exercise/summary',
+    name: 'summary',
+    component: Summary
+  },
+  {
     path: '/welcome',
     name: 'welcome',
     component: Welcome
@@ -73,5 +79,9 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 })
+
+// router.beforeEach((from) => {
+//   console.log(from.path)
+// })
 
 export default router

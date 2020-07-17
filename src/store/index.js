@@ -12,6 +12,7 @@ export default new Vuex.Store({
   },
   mutations: {
     pushExercise: (state, payload) => {
+      state.exercise.length = 0
       payload.data.data.forEach(element => {
         state.exercise.push(element)
       });
@@ -24,12 +25,18 @@ export default new Vuex.Store({
     },
     updateStateProp(state, payload){
       state[payload.prop] = payload.value
+    },
+    cleanExercise(state){
+      state.exercise.length = 0
+      state.currentQuestion = null
     }
 
   },
   actions: {
-    async getExercise({ commit }){
-      commit('pushExercise', await Api().get("/exercise/verbs"))
+    async getExercise({ commit }, options){
+      const url = `/exercise/${options}`
+      console.log(url)
+      commit('pushExercise', await Api().get(url))
     },
     newRandomQuestion( {commit, getters}) {
       const dummyVar = getters.getUnanswered

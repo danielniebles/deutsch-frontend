@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid class="fill-height" id="add-verb">
+  <v-container fluid class="fill-height" id="add-adj">
     <v-row align="center" justify="center">
       <v-col cols="12" sm="8" md="4">
         <v-card shaped dark>
@@ -20,8 +20,7 @@
                 v-model="value"
                 required
                 autocomplete="off"
-              >
-              </v-text-field>
+              ></v-text-field>
 
               <v-text-field
                 label="Translation"
@@ -32,8 +31,7 @@
                 v-model="translation"
                 required
                 autocomplete="off"
-              >
-              </v-text-field>
+              ></v-text-field>
             </v-card-text>
 
             <v-card-actions>
@@ -62,24 +60,24 @@ export default {
       value: null,
       translation: null,
       errors: [],
-      rules: [(v) => !!v || "This value is required"],
+      rules: [v => !!v || "This value is required"]
     };
   },
   methods: {
-    async saveAdj() { 
-        this.errors.length = 0
-        if(this.translation && this.value) {
-            await Api().post("/adjectives/write", {
-                value: this.value,
-                translation: this.translation,
-                })
-            const path = "/";
-            if (this.$route.path !== path) this.$router.push("/adjs/all");
-        }else{
-            if(!this.value)this.errors.push("Value required")
-            if(!this.translation)this.errors.push("Translation required")
-        }    
-    },
-  },
+    async saveAdj() {
+      this.errors.length = 0;
+      if (this.translation && this.value) {
+        await Api().post("/adjectives/write", {
+          value: this.value,
+          translation: this.translation
+        });
+        const path = "/";
+        if (this.$route.path !== path) this.$router.push("/adjs/all");
+      } else {
+        if (!this.value) this.errors.push("Value required");
+        if (!this.translation) this.errors.push("Translation required");
+      }
+    }
+  }
 };
 </script>

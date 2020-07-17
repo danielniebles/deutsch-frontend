@@ -1,6 +1,6 @@
 <template>
   <v-container fluid class="fill-height" id="input-article">
-    <v-row align="center" justify="center" class="mt-12">
+    <v-row class="main-row" align="center" justify="center">
       <v-col cols="12" sm="8" md="4">
         <v-card shaped dark>
           <v-toolbar color="secondary" dark flat>
@@ -56,8 +56,8 @@
       </v-col>
     </v-row>
 
-    <v-row column justify-space-between style="height:100px">
-      <v-container style="padding:0px;" class=" fill-height align-end">
+    <v-row justify-space-between style="height:20%; margin-top:20px">
+      <v-container style="padding:0px;" class="fill-height align-end">
         <v-alert
           :value="check"
           :color="status"

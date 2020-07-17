@@ -2,15 +2,11 @@
   <v-container id="view-all-adjs" fluid>
     <v-row>
       <v-col>
-        <v-card class="mx-auto" shaped elevation="8">
+        <v-card shaped elevation="8" style="margin:12px;">
           <v-list two-line>
             <v-subheader>Adjectives</v-subheader>
             <template v-for="(adjective,index) in adjectives">
-              <v-divider
-                v-if="true"
-                :key="adjective.value"
-                :inset="false"
-              ></v-divider>
+              <v-divider v-if="true" :key="adjective.value" :inset="false"></v-divider>
 
               <v-list-item else :key="adjective.docId" style="height:1px">
                 <v-list-item-content>
@@ -22,7 +18,7 @@
                   <router-link
                     style="text-decoration: none;"
                     :to="{
-                      name: 'view-adj',
+                      name: 'view-verb',
                       params: { docId: adjective.docId },
                     }"
                   >
@@ -37,7 +33,6 @@
                     <v-icon>mdi-pencil</v-icon>
                   </v-btn>
                 </v-list-item-icon>
-                
               </v-list-item>
             </template>
           </v-list>
@@ -50,10 +45,9 @@
       </v-btn>
     </router-link>
 
-             <v-overlay :value="overlay" :absolute="absolute">
-                <EditAdj :adj="this.adjectives[this.selectedAdj]"></EditAdj>
-            </v-overlay>
-    
+    <v-overlay :value="overlay" :absolute="absolute">
+      <EditAdj :adj="this.adjectives[this.selectedAdj]"></EditAdj>
+    </v-overlay>
   </v-container>
 </template>
 
@@ -63,38 +57,36 @@ import { eventBus } from "../../main.js";
 import EditAdj from "./EditAdj";
 
 export default {
-
   name: "view-adj",
   components: {
-    EditAdj,
+    EditAdj
   },
   data() {
     return {
       adjectives: [],
       selectedAdj: 0,
       overlay: false,
-      absolute: false,
+      absolute: false
     };
   },
   methods: {
     async getAdjs() {
       const response = await Api().get("/adjectives/all");
       const dummyVar = response.data.data;
-      dummyVar.forEach((element) => {
+      dummyVar.forEach(element => {
         this.adjectives.push(element);
       });
     },
-    editAdj(index){
-      this.selectedAdj = index
-      this.overlay = !this.overlay
+    editAdj(index) {
+      this.selectedAdj = index;
+      this.overlay = !this.overlay;
     }
   },
   mounted() {
     this.getAdjs();
-    eventBus.$on('click-back', (overlay) => {
+    eventBus.$on("click-back", overlay => {
       this.overlay = !overlay;
     });
-    
-  },
+  }
 };
 </script>

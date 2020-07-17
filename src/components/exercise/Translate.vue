@@ -1,6 +1,6 @@
 <template>
-  <v-container fluid id="translate" class="fill-height">
-    <v-row align="center" justify="center" class="mt-12">
+  <v-container id="translate">
+    <v-row class="main-row" align="center" justify="center">
       <v-col cols="12" sm="8" md="4">
         <v-card shaped dark>
           <v-toolbar color="secondary" dark flat>
@@ -91,7 +91,7 @@
       </v-col>
     </v-row>
 
-    <v-row column justify-space-between style="height:100px">
+    <v-row style="height:20%; margin-top:40px">
       <v-container style="padding:0px;" class=" fill-height align-end">
         <v-alert
           :value="check"
@@ -120,7 +120,7 @@
 
 <script>
 import { eventBus } from "../../main.js";
-import { mapGetters, mapState, mapActions } from "vuex";
+import { mapGetters, mapState, mapActions, mapMutations } from "vuex";
 export default {
   name: "input-article",
   data() {
@@ -137,6 +137,7 @@ export default {
   methods: {
     ...mapGetters(["getRandomQuestion", "getAnsweredCount"]),
     ...mapActions(["markAnswered", "changeStatus"]),
+    ...mapMutations(["cleanExercise"]),
     checkAnswer() {
       this.check = !this.check;
       this.disabled = !this.disabled;
